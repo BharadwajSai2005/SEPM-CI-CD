@@ -6,16 +6,29 @@ from evidently import ColumnMapping
 import json, os
 
 FEATURE_NAMES = [
-    "age", "sex", "cp", "trestbps", "chol",
-    "fbs", "restecg", "thalach", "exang",
-    "oldpeak", "slope", "ca", "thal"
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal",
 ]
 
-NUMERICAL_FEATURES   = ["age", "trestbps", "chol", "thalach", "oldpeak"]
+NUMERICAL_FEATURES = ["age", "trestbps", "chol", "thalach", "oldpeak"]
 CATEGORICAL_FEATURES = ["sex", "cp", "fbs", "restecg", "exang", "slope", "ca", "thal"]
 
-def run_drift_report(reference_path="data/processed/X_test_raw.npy",
-                     current_path="data/processed/X_test_raw.npy"):
+
+def run_drift_report(
+    reference_path="data/processed/X_test_raw.npy",
+    current_path="data/processed/X_test_raw.npy",
+):
     """
     In production, current_path would point to a live inference log.
     Here we simulate by adding small Gaussian noise to the test set.
@@ -32,8 +45,7 @@ def run_drift_report(reference_path="data/processed/X_test_raw.npy",
     cur_df = pd.DataFrame(X_cur, columns=FEATURE_NAMES)
 
     col_map = ColumnMapping(
-        numerical_features   = NUMERICAL_FEATURES,
-        categorical_features = CATEGORICAL_FEATURES
+        numerical_features=NUMERICAL_FEATURES, categorical_features=CATEGORICAL_FEATURES
     )
 
     report = Report(metrics=[DataDriftPreset(), DataQualityPreset()])
@@ -46,15 +58,15 @@ def run_drift_report(reference_path="data/processed/X_test_raw.npy",
     drift_detected = result["metrics"][0]["result"]["dataset_drift"]
 
     drifted_features = [
-        col for col, stats in
-        result["metrics"][0]["result"]["drift_by_columns"].items()
+        col
+        for col, stats in result["metrics"][0]["result"]["drift_by_columns"].items()
         if stats["drift_detected"]
     ]
 
     summary = {
-        "dataset_drift":     drift_detected,
-        "drifted_features":  drifted_features,
-        "n_drifted":         len(drifted_features),
+        "dataset_drift": drift_detected,
+        "drifted_features": drifted_features,
+        "n_drifted": len(drifted_features),
     }
 
     with open("reports/drift_summary.json", "w") as f:
@@ -67,6 +79,7 @@ def run_drift_report(reference_path="data/processed/X_test_raw.npy",
         print("[WARN] Drift threshold exceeded — retrain recommended.")
 
     return summary
+
 
 if __name__ == "__main__":
     run_drift_report()
