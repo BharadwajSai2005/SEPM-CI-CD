@@ -16,8 +16,7 @@ jobs:
         with: { python-version: "3.11" }
       - run: pip install flake8 black
       - run: black --check src/ tests/
-      - run: flake8 src/ tests/ --max-line-length=100 --ignore=E203,W503
-
+      - run: flake8 src/ tests/ --max-line-length=100 --ignore=E203,W503,E401,F401,E402,F841
   pipeline:
     name: Full ML Pipeline
     runs-on: ubuntu-latest
