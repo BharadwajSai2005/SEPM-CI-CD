@@ -57,10 +57,15 @@ def run_drift_report(
     result = report.as_dict()
     drift_detected = result["metrics"][0]["result"]["dataset_drift"]
 
+    drift_cols = (
+        result["metrics"][0]["result"].get("drift_by_columns")
+        or result["metrics"][0]["result"].get("column_drift")
+        or {}
+    )
     drifted_features = [
         col
-        for col, stats in result["metrics"][0]["result"]["drift_by_columns"].items()
-        if stats["drift_detected"]
+        for col, stats in drift_cols.items()
+        if stats.get("drift_detected", False)
     ]
 
     summary = {
