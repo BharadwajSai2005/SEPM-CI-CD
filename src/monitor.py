@@ -63,9 +63,7 @@ def run_drift_report(
         or {}
     )
     drifted_features = [
-        col
-        for col, stats in drift_cols.items()
-        if stats.get("drift_detected", False)
+        col for col, stats in drift_cols.items() if stats.get("drift_detected", False)
     ]
 
     summary = {
