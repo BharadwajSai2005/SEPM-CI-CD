@@ -30,7 +30,7 @@ FEATURE_RANGES = {
     "oldpeak": (0.0, 7.0),
     "ca": (0, 4),
     "sex": (0, 1),
-    "cp": (0, 3),
+    "cp": (1, 4),
     "fbs": (0, 1),
     "restecg": (0, 2),
     "exang": (0, 1),
