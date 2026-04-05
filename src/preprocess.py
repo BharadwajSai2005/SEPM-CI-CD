@@ -34,8 +34,8 @@ FEATURE_RANGES = {
     "fbs": (0, 1),
     "restecg": (0, 2),
     "exang": (0, 1),
-    "slope": (0, 2),
-    "thal": (0, 3),
+    "slope": (1, 3),
+    "thal": (1, 7),
 }
 
 
