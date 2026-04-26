@@ -386,10 +386,10 @@
           <span class="hint">1 = typical angina, 4 = asymptomatic</span>
           <select name="cp" required>
             <option value="" disabled selected>Select type</option>
-            <option value="1">1 — Typical angina</option>
-            <option value="2">2 — Atypical angina</option>
-            <option value="3">3 — Non-anginal pain</option>
-            <option value="4">4 — Asymptomatic</option>
+            <option value="0">0 — Typical angina</option>
+            <option value="1">1 — Atypical angina</option>
+            <option value="2">2 — Non-anginal pain</option>
+            <option value="3">3 — Asymptomatic</option>
           </select>
         </div>
         <div class="field">
@@ -417,9 +417,9 @@
           <span class="hint">1 = upsloping, 3 = downsloping</span>
           <select name="slope" required>
             <option value="" disabled selected>Select</option>
-            <option value="1">1 — Upsloping</option>
-            <option value="2">2 — Flat</option>
-            <option value="3">3 — Downsloping</option>
+            <option value="0">0 — Upsloping</option>
+            <option value="1">1 — Flat</option>
+            <option value="2">2 — Downsloping</option>
           </select>
         </div>
       </div>
@@ -475,9 +475,10 @@
           <span class="hint">Blood disorder type (1–7)</span>
           <select name="thal" required>
             <option value="" disabled selected>Select</option>
-            <option value="3">3 — Normal</option>
-            <option value="6">6 — Fixed defect</option>
-            <option value="7">7 — Reversible defect</option>
+            <option value="0">0 — Normal</option>
+            <option value="1">1 — Fixed defect</option>
+            <option value="2">2 — Reversible defect</option>
+            <option value="3">3 — Other</option>
           </select>
         </div>
       </div>
