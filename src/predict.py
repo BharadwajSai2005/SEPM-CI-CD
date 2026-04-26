@@ -2,7 +2,10 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field
-import joblib, numpy as np, json
+import json
+
+import joblib
+import numpy as np
 from typing import Optional
 
 app = FastAPI(
@@ -13,7 +16,7 @@ app = FastAPI(
 
 model = joblib.load("models/model.pkl")
 scaler = joblib.load("models/scaler.pkl")
-templates = Jinja2Templates(directory="templates")  # ← ADD 1
+templates = Jinja2Templates(directory="templates")
 
 
 class PatientInput(BaseModel):
@@ -60,7 +63,7 @@ def risk_category(prob: float) -> str:
     return "high"
 
 
-@app.get("/", response_class=HTMLResponse)  # ← ADD 2
+@app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
